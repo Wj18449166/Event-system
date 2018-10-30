@@ -1,0 +1,99 @@
+<!--search.ejs-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="http://localhost:1337">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="/Event/search">Search</a>
+            <a class="nav-item nav-link " href="/Event/create">Create</a>
+            <a class="nav-item nav-link " href="/Event/admin">Admin</a>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Event Management System</h1>
+        <p class="lead">HKBU Event Management System is a web-based system for department and student
+            societies to boardcast events and activities as well as registration.
+        </p>
+    </div>
+</div>
+
+<% const current = parseInt(req.query.page) || 1; %>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="/event/search/?page=<%= Math.max(current-1, 1) %>">Previous</a>
+        </li>
+
+        <% for (i = 1; i <= count; i++) { %>
+        <li class="page-item">
+            <a class="page-link" href="/event/search/?page=<%= i %>">
+                <%= i %></a>
+        </li>
+        <% } %>
+
+        <li class="page-item">
+            <a class="page-link" href="/event/search/?page=<%= Math.min(current+1, count) %>">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="row">
+    <div class="card col-sm-8 col-lg-8 col-xl-8">
+        <div class="row">
+            <% events.forEach( function(model) { %>
+
+            <div class="card col-sm-6 col-lg-6 col-xl-6">
+                <img class="img-fluid img-thumbnail" src=<%=model.imgURL %> />
+                <a href="/Event/detail/<%=model.id %>" class="card-link">
+                    <%= model.name %></a>
+
+                <%= model.shortDes %>
+            </div>
+            <% }); %>
+        </div>
+
+    </div>
+
+    <div class="col-sm-4 col-lg-4 col-xl-4">
+        <lable>Event name</lable>
+        <input type="text" , class="form-control" name="Event[name]" required>
+        <br>
+
+        <div>
+            <lable>Organizer</lable>
+            <div>
+                <!-- <select class="selectpicker show-tick form-control" data-width="250px" data-live-search="true" name="Event[organizer]"> -->
+                <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[organizer]">
+                    <!-- <select class="selectpicker" name="Event[organizer]"> -->
+                    <option>Select orginaizer here:</option>
+                    <option value="abc">ABC</option>
+                    <option value="acb">ACB</option>
+                </select>
+            </div>
+            <br>
+        </div>
+
+        <lable>Start Date</lable>
+        <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]" /></div><br>
+
+        <lable>End Date</lable>
+        <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]" /></div><br>
+
+        <div>
+            <lable>Venue</lable>
+            <div>
+                <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[venue]">
+                    <option>Select venue here:</option>
+                    <option value="kl">Kowloon</option>
+                    <option value="acb">N.T</option>
+                    <option value="acb">Hong Kong Island</option>
+                </select>
+            </div>
+            <br>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </div>
+</div>

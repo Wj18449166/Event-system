@@ -1,0 +1,98 @@
+<!--create.ejs-->
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="http://localhost:1337">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/Event/search">Search</a>
+            <a class="nav-item nav-link active" href="/Event/create">Create</a>
+            <a class="nav-item nav-link " href="/Event/admin">Admin</a>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Event Management System</h1>
+        <p class="lead">HKBU Event Management System is a web-based system for department and student
+            societies to boardcast events and activities as well as registration.
+        </p>
+    </div>
+</div>
+
+
+<form action="/event/create" method="POST">
+    <div class="row">
+
+        <div class="col-sm-6 col-lg-6 col-xl-6">
+            <lable>Event name</lable>
+            <input type="text" , class="form-control" name="Event[name]" required>
+            <br>
+            <lable>Short Description</lable>
+            <textarea rows="7" class="form-control" name="Event[shortDes]" required></textarea>
+            <br>
+            <lable>Full Description</lable>
+            <textarea rows="9" class="form-control" name="Event[fullDes]" required></textarea>
+        </div>
+
+
+        <div class="col-sm-6 col-lg-6 col-xl-6">
+
+            <lable>Image URL</lable>
+            <input type="text" , class="form-control" name="Event[imgURL]" required><br>
+
+            <div>
+                <lable>Organizer</lable>
+                <div>
+                    <!-- <select class="selectpicker show-tick form-control" data-width="250px" data-live-search="true" name="Event[organizer]"> -->
+                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[organizer]">
+                        <!-- <select class="selectpicker" name="Event[organizer]"> -->
+                        <option>Please pick one:</option>
+                        <option value="abc">ABC</option>
+                        <option value="acb">ACB</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+
+
+
+            <lable>Event Date</lable>
+            <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]" /></div><br>
+
+
+            <lable>Time</lable>
+            <input type="text" , class="form-control" name="Event[time]" required><br>
+
+            <div>
+                <lable>Venue</lable>
+                <div>
+                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[venue]">
+                        <option>Please pick one:</option>
+                        <option value="kl">Kowloon</option>
+                        <option value="acb">N.T</option>
+                        <option value="acb">Hong Kong Island</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+
+            <lable>Quote</lable>
+            <input type="number" , class="form-control" name="Event[quote]" required><br>
+
+            <div>
+                <label><input type="checkbox" name="Event[hightlig]" value="Hightlighted">
+                    Hightlighted Event </label><br>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+
+        </div>
+
+
+
+
+    </div>
+</form>

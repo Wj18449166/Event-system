@@ -1,0 +1,38 @@
+<!--admin.ejs-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="http://localhost:1337">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/Event/search">Search</a>
+            <a class="nav-item nav-link" href="/Event/create">Create</a>
+            <a class="nav-item nav-link active" href="/Event/admin">Admin</a>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Event Management System</h1>
+        <p class="lead">HKBU Event Management System is a web-based system for department and student
+            societies to boardcast events and activities as well as registration.
+        </p>
+    </div>
+</div>
+<table class="table table-striped">
+    <!-- <tbody> -->
+    <% eventss.forEach( function(model) { %>
+    <tr>
+        <td>
+            <%= model.id %>
+        </td>
+        <!-- <td>
+            <%= model.name %>
+        </td> -->
+        <td>
+         <a href="/Event/update/<%=model.id %>" class="card-link">
+            <%= model.name %></a>   
+        </td>
+        
+    </tr>
+    <% }); %>
+    <!-- </tbody> -->
+</table>

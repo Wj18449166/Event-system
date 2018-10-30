@@ -1,0 +1,93 @@
+<!--index.ejs-->
+<!-- <table class="table">
+    <% events.forEach( function(model) { %>
+    
+    <% }); %>
+</table> -->
+
+<!--home.ejs-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="http://localhost:1337">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/Event/search">Search</a>
+            <a class="nav-item nav-link" href="/Event/create">Create</a>
+            <a class="nav-item nav-link" href="/Event/admin">Admin</a>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Event Management System</h1>
+        <p class="lead">HKBU Event Management System is a web-based system for department and student
+            societies to boardcast events and activities as well as registration.
+        </p>
+    </div>
+</div>
+<div class="row">
+
+    <div class="card col-sm-6 col-lg-6 col-xl-6">
+        <a href="/Event/detail/<%=events[1].id %>" class="card-link">
+            <%= events[1].name %></a>
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <img class="img-fluid img-thumbnail" src=<%=events[1].imgURL %> />
+            </div>
+
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <p>
+                    <%= events[1].shortDes %>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-sm-6 col-lg-6 col-xl-6">
+        <a href="/Event/detail/<%=events[2].id %>" class="card-link">
+            <%= events[1].name %></a>
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <img class="img-fluid img-thumbnail" src=<%=events[2].imgURL %> />
+            </div>
+
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <p>
+                    <%= events[2].shortDes %>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-sm-6 col-lg-6 col-xl-6">
+        <a href="/Event/detail/<%=events[3].id %>" class="card-link">
+            <%= events[3].name %></a>
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <img class="img-fluid img-thumbnail" src=<%=events[3].imgURL %> />
+            </div>
+
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <p>
+                    <%= events[3].shortDes %>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-sm-6 col-lg-6 col-xl-6">
+        <a href="/Event/detail/<%=events[0].id %>" class="card-link">
+            <%= events[0].name %></a>
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <img class="img-fluid img-thumbnail" src=<%=events[0].imgURL %> />
+            </div>
+
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <p>
+                    <%= events[0].shortDes %>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

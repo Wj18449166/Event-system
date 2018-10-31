@@ -62,7 +62,7 @@
                     <!-- <select class="selectpicker show-tick form-control" data-width="250px" data-live-search="true" name="Event[organizer]"> -->
                     <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="organizer">
                         <!-- <select class="selectpicker" name="Event[organizer]"> -->
-                        <option>Select orginaizer here:</option>
+                       
                         <option value="abc">ABC</option>
                         <option value="acb">ACB</option>
                     </select>
@@ -87,7 +87,7 @@
                 <lable>Venue</lable>
                 <div>
                     <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="venue">
-                        <option>Select venue here:</option>
+                       
                         <option value="kl">Kowloon</option>
                         <option value="acb">N.T</option>
                         <option value="acb">Hong Kong Island</option>
@@ -101,3 +101,9 @@
 
     </div>
 </div>
+<script>
+        $(function () {
+            $("#organizer").val("");
+            $("#venue").val("");
+        });
+    </script>

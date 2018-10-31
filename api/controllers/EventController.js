@@ -122,21 +122,39 @@ module.exports = {
 
     search: async function (req, res) {
 
-        var hName = "Hightlighted" || req.query.name;
+        console.log("point 1");
+        const sName = req.query.name || "";
+        const sOrganizer = req.query.organizer || "";
+        const sStartDate = req.query.startDate || "";
+        const sEndDate = req.query.endDate || "";
+        const sVenue = req.query.venue || "";
+        //var hName = "Hightlighted" || req.query.name;
         const qPage = Math.max(req.query.page - 1, 0) || 0;
         const numOfItemsPerPage = 2;
+
+        console.log("point 2: " + sName);
        
-       
-        console.log(hName);
+        var swhere = {};
+        console.log("swhere01" + swhere);
+
+        if (sName != "") swhere['name'] = {contains: sName};
+        if (sOrganizer != "") swhere['organizer'] = sOrganizer;
+        if (sStartDate != '') swhere['date'] = {'>=': sStartDate};
+        if (sEndDate != '') swhere['date'] = {'<=': sEndDate};
+        if (sVenue != '') swhere['venue'] = sVenue;
+        
+        console.log("swhere02" + swhere['name']);
+
         var models = await Event.find({
-            where: { hightlig: { contains: hName } },
+            where: swhere,
             sort: 'name',
             limit: numOfItemsPerPage,
             skip: numOfItemsPerPage * qPage
         });
 
-        var numOfPage = Math.ceil(await Event.count() / numOfItemsPerPage);
+        //console.log("model" + swhere['name']);
 
+        var numOfPage = Math.ceil(await Event.count() / numOfItemsPerPage);
         return res.view('event/search', { events: models, count: numOfPage });
     },
 

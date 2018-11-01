@@ -25,12 +25,13 @@ module.exports = {
 
         //var hName = "Hightlighted" || req.query.name;
         //console.log(hName);
-        var models = await Event.find({
-            where: {highlighted: true},
+        var models =  await Event.find({
+            where: { highlighted: true },
             sort: 'name'
-        });
-        //console.log(models[1]);
-        //console.log(models[2]);
+        })
+
+        
+        console.log("try = " + await Event.count());
 
         return res.view('event/index', { events: models });
     },
@@ -38,15 +39,10 @@ module.exports = {
     detail: async function (req, res) {
 
         var message = Event.getInvalidIdMsg(req.params);
-
         console.log(message);
-
         if (message) return res.badRequest(message);
-
         var model = await Event.findOne(req.params.id);
-
         if (!model) return res.notFound();
-
         return res.view('event/detail', { event: model });
 
     },
@@ -113,7 +109,6 @@ module.exports = {
 
     search: async function (req, res) {
 
-        console.log("point 1");
         const sName = req.query.name || "";
         const sOrganizer = req.query.organizer || "";
         const sStartDate = req.query.startDate || "";
@@ -123,18 +118,18 @@ module.exports = {
         const qPage = Math.max(req.query.page - 1, 0) || 0;
         const numOfItemsPerPage = 2;
 
-        console.log("point 2: " + sName);
-       
-        var swhere = {};
-        console.log("swhere01" + swhere);
+        //console.log("qPage: " + qPage);
 
-        if (sName != "") swhere['name'] = {contains: sName};
+        var swhere = {};
+        //console.log("swhere01" + swhere);
+
+        if (sName != "") swhere['name'] = { contains: sName };
         if (sOrganizer != "") swhere['organizer'] = sOrganizer;
-        if (sStartDate != '') swhere['date'] = {'>=': sStartDate};
-        if (sEndDate != '') swhere['date'] = {'<=': sEndDate};
+        if (sStartDate != '') swhere['date'] = { '>=': sStartDate };
+        if (sEndDate != '') swhere['date'] = { '<=': sEndDate };
         if (sVenue != '') swhere['venue'] = sVenue;
-        
-        console.log("swhere02" + swhere['name']);
+
+        //console.log("swhere02" + swhere['name']);
 
         var models = await Event.find({
             where: swhere,
@@ -143,9 +138,21 @@ module.exports = {
             skip: numOfItemsPerPage * qPage
         });
 
+        var number = await Event.count({
+            where: swhere,
+        });
+
         //console.log("model" + swhere['name']);
 
-        var numOfPage = Math.ceil(await Event.count() / numOfItemsPerPage);
+        var numOfPage = Math.ceil(await number / numOfItemsPerPage);
+        
+        //console.log("总数，count: " + Event.count());
+        //console.log("总数，number: " + number);
+        //console.log("每一页多少条，numOfItemsPerPage: " + numOfItemsPerPage);
+        //console.log("第几页，qPage: " + qPage);
+        //console.log("总页数，numOfPage: " + numOfPage);
+        //console.log("--------------------------------------");
+
         return res.view('event/search', { events: models, count: numOfPage });
     },
 

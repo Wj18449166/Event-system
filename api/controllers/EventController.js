@@ -5,8 +5,7 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 var swhere ={};
-var  qPage = 0;
-var numOfItemsPerPage = 0 ;
+
 
 
 module.exports = {
@@ -110,9 +109,8 @@ search: async function (req, res) {
         const sStartDate = req.query.startDate || "";
         const sEndDate = req.query.endDate || "";
         const sVenue = req.query.venue || "";
-        qPage = Math.max(req.query.page - 1, 0) || 0;
-        numOfItemsPerPage = 2;
-
+        const qPage = Math.max(req.query.page - 1, 0) || 0;
+        const numOfItemsPerPage = 2;
         swhere = {};
 
         if (sName != "") swhere['name'] = { contains: sName };
@@ -132,15 +130,18 @@ search: async function (req, res) {
             where: swhere,
         });
 
+        console.log("number = " + number) ;
+
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
 
-        return res.view('event/paginate', { events: models, count: numOfPage });
+        return res.view('event/search', { events: models, count: numOfPage });
 
 },
     searchResult: async function (req, res) {
 
-        console.log("searchResult")
-        var modelResult = await Event.find({
+        const qPage = Math.max(req.query.page - 1, 0) || 0;
+        const numOfItemsPerPage = 2;
+        var models = await Event.find({
             where: swhere,
             sort: 'name',
             limit: numOfItemsPerPage,
@@ -150,9 +151,10 @@ search: async function (req, res) {
         var number = await Event.count({
             where: swhere,
         });
+        console.log("number result = " + number) ;
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
 
-        return res.view('event/search', { events: modelResult, count: numOfPage });
+        return res.view('event/search', { events: models, count: numOfPage });
     },
 
 

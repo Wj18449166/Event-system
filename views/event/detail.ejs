@@ -20,16 +20,20 @@
 
 <div class="row">
     <div class="card col-sm-12 col-lg-12 col-xl-12">
-           <h5><%= event.name %></h5>
-        <div class="row">
-            <div class="col-sm-4 col-lg-4 col-xl-4">
-                <img class="img-fluid img-thumbnail" src=<%=event.imgURL %> />
-            </div>
-
-            <div class="card col-sm-8 col-lg-8 col-xl-8">
-                <p>
-                        <%=event.fullDes %>
-                </p>
+        <div class="card-body">
+            <h4><%= event.name %></h4>
+            <div class="media">
+                <img class="mr-3" src="<%= event.imgURL %>" style="max-width: 15rem">
+                <div class="media-body">
+                    <ul class="card list-group list-group-flush">
+                        <li class="list-group-item"><%= event.fullDes %></li>
+                        <li class="list-group-item"><b>Organizer: </b><%= event.organizer %></li>
+                        <li class="list-group-item"><b>Date: </b><%= event.eventDate %></li>
+                        <li class="list-group-item"><b>Time: </b><%= event.time %></li>
+                        <li class="list-group-item"><b>Venue: </b><%= event.venue %></li>
+                        <li class="list-group-item"><b>Quota: </b><%= event.quote %></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -1,12 +1,4 @@
 <!--update.ejs-->
-<!-- <form action="/event/update/<%= event.id %>" method="POST">
-    <div class="form-group">
-        <label>Name</label>
-        <input type="text" class="form-control" name="Event[name]" value="<%= event.name %>" required>
-    </div>
-   
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
@@ -28,85 +20,79 @@
 
 
 
-
 <form action="/event/update/<%= event.id %>" method="POST">
 
 
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-xl-6">
-            <lable>Event name</lable>
+            <label>Event name</label>
             <input type="text" , class="form-control" name="Event[name]" value="<%= event.name %>" required>
             <br>
-            <lable>Short Description</lable>
+            <label>Short Description</label>
             <textarea rows="7" class="form-control" name="Event[shortDes]" required><%= event.shortDes %></textarea>
             <br>
-            <lable>Full Description</lable>
+            <label>Full Description</label>
             <textarea rows="9" class="form-control" name="Event[fullDes]" required><%= event.fullDes %></textarea>
 
         </div>
 
         <div class="col-sm-6 col-lg-6 col-xl-6">
 
-            <lable>Image URL</lable>
+            <label>Image URL</label>
             <input type="text" , class="form-control" name="Event[imgURL]" value="<%= event.imgURL %>" required><br>
 
-            <div>
-                <lable>Organizer</lable>
-                <div>
-                    <!-- <select class="selectpicker show-tick form-control" data-width="250px" data-live-search="true" name="Event[organizer]"> -->
-                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[organizer]">
-                        <!-- <select class="selectpicker" name="Event[organizer]"> -->
-                        <option>Please pick one:</option>
-                        <option value="abc">ABC</option>
-                        <option value="acb">ACB</option>
-                    </select>
-                </div>
-                <br>
+            <div class="form-group">
+                <label for="organizer">Organizer</label>
+                <select class="form-control" name="Event[organizer]" id="organizer">
+                    <option > ABC</option>
+                    <option > ACB</option>
+                </select>
             </div>
+            <%= event.organizer %>
+
+            <label>Event Date</label>
+            <div><input type="text" class="form-control mydate" name="Event[eventDate]" value="<%= event.eventDate %>" /></div><br>
 
 
-
-            <lable>Event Date</lable>
-            <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]"
-                    value="<%= event.eventDate %>" /></div><br>
-
-
-            <lable>Time</lable>
+            <label>Time</label>
             <input type="text" , class="form-control" name="Event[time]" value="<%= event.time %>" required><br>
 
-            <div>
-                <lable>Venue</lable>
-                <div>
-                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[venue]"
-                        value="<%= event.venue %>">
-                        <option>Please pick one:</option>
-                        <option value="kl">Kowloon</option>
-                        <option value="acb">N.T</option>
-                        <option value="acb">Hong Kong Island</option>
-                    </select>
-                </div>
-                <br>
+            <div class="form-group">
+                <label for="venue">Venue</label>
+                <select class="form-control" name="Event[venue]" id="venue">
+                    <option >Kowloon</option>
+                    <option >N.T</option>
+                    <option >Hong Kong Island</option>
+                </select>
             </div>
 
-            <lable>Quote</lable>
+            <label>Quote</label>
             <input type="number" , class="form-control" name="Event[quote]" value="<%= event.quote %>" required><br>
 
-            <div>
-                <label><input type="checkbox" name="Event[hightlig]" value="Hightlighted">
-                    Hightlighted Event </label><br>
-            </div>
+                <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="highlighted" name="Event[highlighted]" value="true">
+                        <label class="form-check-label" for="highlighted">Highlighted Event</label>
+                    </div>
 
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-
+           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-
-
-
-        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+    </div>
 </form>
 
 <form method="POST" action="/event/delete/<%= event.id %>">
     <button class="btn btn-danger" type="submit">Delete</button>
 </form>
+
+
+<script>
+    window.onload =function() {
+        //alert("this window.onload");
+        $("#organizer").val("<%= event.organizer %>"); 
+        $("#venue").val("<%= event.venue %>");
+        if(<%= event.highlighted %>){
+            //alert("this window.onload");
+            $("#highlighted").attr("checked", true);
+        }
+        
+};
+</script>

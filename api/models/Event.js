@@ -41,9 +41,10 @@ module.exports = {
     quote: {
       type: "number"
     },
-    hightlig: {
-      type: "string"
-    },
+    highlighted: {
+      type: 'boolean',
+      defaultsTo: false
+    }
 
 
 

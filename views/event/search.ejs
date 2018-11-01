@@ -18,6 +18,8 @@
     </div>
 </div>
 
+
+<!-- 分页 日期 问题 -->
 <% const current = parseInt(req.query.page) || 1; %>
 <nav aria-label="Page navigation example">
     <ul class="pagination">
@@ -52,45 +54,38 @@
 
     <div class="col-sm-4 col-lg-4 col-xl-4">
         <form action="/Event/search" method="GET">
-            <lable>Event name</lable>
-            <input type="text" , class="form-control" name="name" required>
+            <label>Event name</label>
+            <input type="text" , class="form-control" name="name">
             <br>
 
             <div>
-                <lable>Organizer</lable>
+                <label>Organizer</label>
                 <div>
                     <!-- <select class="selectpicker show-tick form-control" data-width="250px" data-live-search="true" name="Event[organizer]"> -->
                     <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="organizer">
                         <!-- <select class="selectpicker" name="Event[organizer]"> -->
-                       
-                        <option value="abc">ABC</option>
-                        <option value="acb">ACB</option>
+                        <option></option>
+                        <option>ABC</option>
+                        <option>ACB</option>
                     </select>
                 </div>
                 <br>
             </div>
 
-            <!--search 不能用改的第一个地方 -->
-            <!-- <lable>Start Date</lable>
-            <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]" /></div><br>
-
-            <lable>End Date</lable>
-            <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]" /></div><br> -->
-
-            <lable>Start Date</lable>
+            <label>Start Date</label>
             <div><input type="text" class="datepicker selectpicker show-tick form-control" name="startDate" /></div><br>
 
-            <lable>End Date</lable>
+            <label>End Date</label>
             <div><input type="text" class="datepicker selectpicker show-tick form-control" name="endDate" /></div><br>
 
             <div>
-                <lable>Venue</lable>
+                <label>Venue</label>
                 <div>
                     <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="venue">
-                       
-                        <option value="kl">Kowloon</option>
-                        <option value="acb">N.T</option>
-                        <option value="acb">Hong Kong Island</option>
+                        <option></option>
+                        <option>Kowloon</option>
+                        <option>N.T</option>
+                        <option>Hong Kong Island</option>
                     </select>
                 </div>
                 <br>
@@ -101,9 +96,3 @@
 
     </div>
 </div>
-<script>
-        $(function () {
-            $("#organizer").val("");
-            $("#venue").val("");
-        });
-    </script>

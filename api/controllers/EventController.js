@@ -23,10 +23,10 @@ module.exports = {
 
     index: async function (req, res) {
 
-        var hName = "Hightlighted" || req.query.name;
-        console.log(hName);
+        //var hName = "Hightlighted" || req.query.name;
+        //console.log(hName);
         var models = await Event.find({
-            where: { hightlig: { contains: hName } },
+            where: {highlighted: true},
             sort: 'name'
         });
         //console.log(models[1]);
@@ -63,21 +63,13 @@ module.exports = {
     update: async function (req, res) {
 
         var message = Event.getInvalidIdMsg(req.params);
-
         if (message) return res.badRequest(message);
-
         if (req.method == "GET") {
-
             var model = await Event.findOne(req.params.id);
-
             if (!model) return res.notFound();
-
-            console.log(model.shortDes);;
-            console.log(model.fullDes);
+            console.log(model.organizer);
             return res.view('event/update', { event: model });
-
         } else {
-
             if (typeof req.body.Event === "undefined")
                 return res.badRequest("Form-data not received.");
 
@@ -91,13 +83,12 @@ module.exports = {
                 time: req.body.Event.time,
                 venue: req.body.Event.venue,
                 quote: req.body.Event.quote,
-                hightlig: req.body.Event.hightlig,
+                highlighted: req.body.Event.highlighted || false,
 
                 //    age: req.body.Event.age
             }).fetch();
 
             if (models.length == 0) return res.notFound();
-
             return res.ok("Record updated");
 
         }

@@ -25,31 +25,31 @@
     <div class="row">
 
         <div class="col-sm-6 col-lg-6 col-xl-6">
-            <lable>Event name</lable>
+            <label>Event name</label>
             <input type="text" , class="form-control" name="Event[name]" required>
             <br>
-            <lable>Short Description</lable>
+            <label>Short Description</label>
             <textarea rows="7" class="form-control" name="Event[shortDes]" required></textarea>
             <br>
-            <lable>Full Description</lable>
+            <label>Full Description</label>
             <textarea rows="9" class="form-control" name="Event[fullDes]" required></textarea>
         </div>
 
 
         <div class="col-sm-6 col-lg-6 col-xl-6">
 
-            <lable>Image URL</lable>
+            <label>Image URL</label>
             <input type="text" , class="form-control" name="Event[imgURL]" required><br>
 
             <div>
-                <lable>Organizer</lable>
+                <label>Organizer</label>
                 <div>
                     <!-- <select class="selectpicker show-tick form-control" data-width="250px" data-live-search="true" name="Event[organizer]"> -->
-                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[organizer]">
+                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[organizer]" id="organizer">
                         <!-- <select class="selectpicker" name="Event[organizer]"> -->
                         <option>Please pick one:</option>
-                        <option value="abc">ABC</option>
-                        <option value="acb">ACB</option>
+                        <option >ABC</option>
+                        <option >ACB</option>
                     </select>
                 </div>
                 <br>
@@ -57,32 +57,34 @@
 
 
 
-            <lable>Event Date</lable>
+            <label>Event Date</label>
             <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]" /></div><br>
 
 
-            <lable>Time</lable>
+            <label>Time</label>
             <input type="text" , class="form-control" name="Event[time]" required><br>
 
-            <div>
-                <lable>Venue</lable>
-                <div>
-                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[venue]">
+            <div class="form-group">
+                <label for="venue">Venue</label>
+                
+                    <select class="form-control" name="Event[venue]" id=“venue”>
                         <option>Please pick one:</option>
-                        <option value="kl">Kowloon</option>
-                        <option value="acb">N.T</option>
-                        <option value="acb">Hong Kong Island</option>
+                        <!-- 为什么不能加value -->
+                        <!-- <option value="kl">Kowloon</option> -->
+                        <option >Kowloon</option>
+                        <option >N.T</option>
+                        <option >Hong Kong Island</option>
                     </select>
-                </div>
-                <br>
+                
+             
             </div>
 
-            <lable>Quote</lable>
+            <label>Quote</label>
             <input type="number" , class="form-control" name="Event[quote]" required><br>
 
-            <div>
-                <label><input type="checkbox" name="Event[hightlig]" value="Hightlighted">
-                    Hightlighted Event </label><br>
+            <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="highlighted" name="Event[highlighted]" value="true">
+                    <label class="form-check-label" for="highlighted">Highlighted Event</label>
             </div>
 
 

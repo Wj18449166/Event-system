@@ -26,13 +26,11 @@ module.exports = {
         //var hName = "Hightlighted" || req.query.name;
         //console.log(hName);
         var models =  await Event.find({
+            limit: 4,
             where: { highlighted: true },
             sort: 'name'
-        })
-
-        
-        console.log("try = " + await Event.count());
-
+        })     
+        //console.log("try = " + await Event.count());
         return res.view('event/index', { events: models });
     },
 
@@ -94,15 +92,10 @@ module.exports = {
     delete: async function (req, res) {
 
         if (req.method == "GET") return res.forbidden();
-
         var message = Event.getInvalidIdMsg(req.params);
-
         if (message) return res.badRequest(message);
-
         var models = await Event.destroy(req.params.id).fetch();
-
         if (models.length == 0) return res.notFound();
-
         return res.ok("Event Deleted.");
 
     },
@@ -114,22 +107,16 @@ module.exports = {
         const sStartDate = req.query.startDate || "";
         const sEndDate = req.query.endDate || "";
         const sVenue = req.query.venue || "";
-        //var hName = "Hightlighted" || req.query.name;
         const qPage = Math.max(req.query.page - 1, 0) || 0;
         const numOfItemsPerPage = 2;
 
-        //console.log("qPage: " + qPage);
-
         var swhere = {};
-        //console.log("swhere01" + swhere);
 
         if (sName != "") swhere['name'] = { contains: sName };
         if (sOrganizer != "") swhere['organizer'] = sOrganizer;
         if (sStartDate != '') swhere['date'] = { '>=': sStartDate };
         if (sEndDate != '') swhere['date'] = { '<=': sEndDate };
         if (sVenue != '') swhere['venue'] = sVenue;
-
-        //console.log("swhere02" + swhere['name']);
 
         var models = await Event.find({
             where: swhere,
@@ -141,8 +128,6 @@ module.exports = {
         var number = await Event.count({
             where: swhere,
         });
-
-        //console.log("model" + swhere['name']);
 
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
         

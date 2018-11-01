@@ -26,68 +26,29 @@
     </div>
 </div>
 <div class="row">
-
-    <div class="card col-sm-6 col-lg-6 col-xl-6">
-        <a href="/Event/detail/<%=events[1].id %>" class="card-link">
-            <%= events[1].name %></a>
+    <div class="card col-sm-12 col-lg-12 col-xl-12">
         <div class="row">
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <img class="img-fluid img-thumbnail" src=<%=events[1].imgURL %> />
-            </div>
+            <% events.forEach( function(model){ %>
+            <div class="card col-6 col-sm-6 col-lg-6 col-xl-6 ">
+                <h5><a href="/Event/detail/<%= model.id %>">
+                        <%= model.name %></a></h5>
+                <div class="row">
 
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <p>
-                    <%= events[1].shortDes %>
-                </p>
+
+                    <div class="col-sm-6 col-lg-6 col-xl-6">
+                        <img class="img-fluid img-thumbnail" src="<%= model.imgURL %>">
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-xl-6">
+                        <p>
+                            <%= events[0].shortDes %>
+                        </p>
+                    </div>
+
+                </div>
             </div>
+            <% }); %>
         </div>
-    </div>
 
-    <div class="card col-sm-6 col-lg-6 col-xl-6">
-        <a href="/Event/detail/<%=events[2].id %>" class="card-link">
-            <%= events[1].name %></a>
-        <div class="row">
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <img class="img-fluid img-thumbnail" src=<%=events[2].imgURL %> />
-            </div>
-
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <p>
-                    <%= events[2].shortDes %>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="card col-sm-6 col-lg-6 col-xl-6">
-        <a href="/Event/detail/<%=events[3].id %>" class="card-link">
-            <%= events[3].name %></a>
-        <div class="row">
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <img class="img-fluid img-thumbnail" src=<%=events[3].imgURL %> />
-            </div>
-
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <p>
-                    <%= events[3].shortDes %>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="card col-sm-6 col-lg-6 col-xl-6">
-        <a href="/Event/detail/<%=events[0].id %>" class="card-link">
-            <%= events[0].name %></a>
-        <div class="row">
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <img class="img-fluid img-thumbnail" src=<%=events[0].imgURL %> />
-            </div>
-
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <p>
-                    <%= events[0].shortDes %>
-                </p>
-            </div>
-        </div>
     </div>
 </div>
+

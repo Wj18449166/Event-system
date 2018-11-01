@@ -30,7 +30,8 @@ module.exports = {
       type: "string"
     },
     eventDate: {
-      type: "string"
+      type: 'string',
+      columnType: 'date'
     },
     time: {
       type: "string"

@@ -4,6 +4,10 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
+var swhere ={};
+var  qPage = 0;
+var numOfItemsPerPage = 0 ;
+
 
 module.exports = {
 
@@ -96,21 +100,20 @@ module.exports = {
         if (message) return res.badRequest(message);
         var models = await Event.destroy(req.params.id).fetch();
         if (models.length == 0) return res.notFound();
+
         return res.ok("Event Deleted.");
 
     },
-
-    search: async function (req, res) {
-
+search: async function (req, res) {
         const sName = req.query.name || "";
         const sOrganizer = req.query.organizer || "";
         const sStartDate = req.query.startDate || "";
         const sEndDate = req.query.endDate || "";
         const sVenue = req.query.venue || "";
-        const qPage = Math.max(req.query.page - 1, 0) || 0;
-        const numOfItemsPerPage = 2;
+        qPage = Math.max(req.query.page - 1, 0) || 0;
+        numOfItemsPerPage = 2;
 
-        var swhere = {};
+        swhere = {};
 
         if (sName != "") swhere['name'] = { contains: sName };
         if (sOrganizer != "") swhere['organizer'] = sOrganizer;
@@ -130,15 +133,26 @@ module.exports = {
         });
 
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
-        
-        //console.log("总数，count: " + Event.count());
-        //console.log("总数，number: " + number);
-        //console.log("每一页多少条，numOfItemsPerPage: " + numOfItemsPerPage);
-        //console.log("第几页，qPage: " + qPage);
-        //console.log("总页数，numOfPage: " + numOfPage);
-        //console.log("--------------------------------------");
 
-        return res.view('event/search', { events: models, count: numOfPage });
+        return res.view('event/paginate', { events: models, count: numOfPage });
+
+},
+    searchResult: async function (req, res) {
+
+        console.log("searchResult")
+        var modelResult = await Event.find({
+            where: swhere,
+            sort: 'name',
+            limit: numOfItemsPerPage,
+            skip: numOfItemsPerPage * qPage
+        });
+
+        var number = await Event.count({
+            where: swhere,
+        });
+        var numOfPage = Math.ceil(await number / numOfItemsPerPage);
+
+        return res.view('event/search', { events: modelResult, count: numOfPage });
     },
 
 

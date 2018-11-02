@@ -2,6 +2,10 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="http://localhost:1337">Home <span class="sr-only">(current)</span></a>
@@ -24,7 +28,7 @@
 <form action="/event/create" method="POST">
     <div class="row">
 
-        <div class="col-sm-6 col-lg-6 col-xl-6">
+        <div class="col-12 col-sm-12 col-lg-6 col-xl-6">
             <label>Event name</label>
             <input type="text" , class="form-control" name="Event[name]" required>
             <br>
@@ -36,7 +40,7 @@
         </div>
 
 
-        <div class="col-sm-6 col-lg-6 col-xl-6">
+        <div class="col-12 col-sm-12 col-lg-6 col-xl-6">
 
             <label>Image URL</label>
             <input type="text" , class="form-control" name="Event[imgURL]" required><br>
@@ -45,11 +49,12 @@
                 <label>Organizer</label>
                 <div>
                     <!-- <select class="selectpicker show-tick form-control" data-width="250px" data-live-search="true" name="Event[organizer]"> -->
-                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[organizer]" id="organizer">
+                    <select class="selectpicker form-control" data-width="250px" data-live-search="true" name="Event[organizer]"
+                        id="organizer">
                         <!-- <select class="selectpicker" name="Event[organizer]"> -->
                         <option>Please pick one:</option>
-                        <option >ABC</option>
-                        <option >ACB</option>
+                        <option>ABC</option>
+                        <option>ACB</option>
                     </select>
                 </div>
                 <br>
@@ -57,31 +62,31 @@
 
             <label>Event Date</label>
             <div><input type="text" class="datepicker selectpicker show-tick form-control" name="Event[eventDate]" /></div><br>
-            
+
             <label>Time</label>
             <input type="text" , class="form-control" name="Event[time]" required><br>
 
             <div class="form-group">
                 <label for="venue">Venue</label>
-                
-                    <select class="form-control" name="Event[venue]" id=“venue”>
-                        <option>Please pick one:</option>
-                        <!-- 为什么不能加value -->
-                        <!-- <option value="kl">Kowloon</option> -->
-                        <option >Kowloon</option>
-                        <option >N.T</option>
-                        <option >Hong Kong Island</option>
-                    </select>
-                
-             
+
+                <select class="form-control" name="Event[venue]" id=“venue”>
+                    <option>Please pick one:</option>
+                    <!-- 为什么不能加value -->
+                    <!-- <option value="kl">Kowloon</option> -->
+                    <option>Kowloon</option>
+                    <option>N.T</option>
+                    <option>Hong Kong Island</option>
+                </select>
+
+
             </div>
 
             <label>Quote</label>
             <input type="number" , class="form-control" name="Event[quote]" required><br>
 
             <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="highlighted" name="Event[highlighted]" value="true">
-                    <label class="form-check-label" for="highlighted">Highlighted Event</label>
+                <input type="checkbox" class="form-check-input" id="highlighted" name="Event[highlighted]" value="true">
+                <label class="form-check-label" for="highlighted">Highlighted Event</label>
             </div>
 
 

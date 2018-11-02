@@ -1,5 +1,9 @@
 <!-- deatail.ejs -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="http://localhost:1337">Home <span class="sr-only">(current)</span></a>
@@ -21,17 +25,31 @@
 <div class="row">
     <div class="card col-sm-12 col-lg-12 col-xl-12">
         <div class="card-body">
-            <h4><%= event.name %></h4>
+            <h4>
+                <%= event.name %>
+            </h4>
             <div class="media">
                 <img class="mr-3" src="<%= event.imgURL %>" style="max-width: 15rem">
                 <div class="media-body">
                     <ul class="card list-group list-group-flush">
-                        <li class="list-group-item"><%= event.fullDes %></li>
-                        <li class="list-group-item"><b>Organizer: </b><%= event.organizer %></li>
-                        <li class="list-group-item"><b>Date: </b><%= event.eventDate %></li>
-                        <li class="list-group-item"><b>Time: </b><%= event.time %></li>
-                        <li class="list-group-item"><b>Venue: </b><%= event.venue %></li>
-                        <li class="list-group-item"><b>Quota: </b><%= event.quote %></li>
+                        <li class="list-group-item">
+                            <%= event.fullDes %>
+                        </li>
+                        <li class="list-group-item"><b>Organizer: </b>
+                            <%= event.organizer %>
+                        </li>
+                        <li class="list-group-item"><b>Date: </b>
+                            <%= event.eventDate %>
+                        </li>
+                        <li class="list-group-item"><b>Time: </b>
+                            <%= event.time %>
+                        </li>
+                        <li class="list-group-item"><b>Venue: </b>
+                            <%= event.venue %>
+                        </li>
+                        <li class="list-group-item"><b>Quota: </b>
+                            <%= event.quote %>
+                        </li>
                     </ul>
                 </div>
             </div>

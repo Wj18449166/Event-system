@@ -4,7 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-var swhere ={};
+var swhere = {};
 
 
 
@@ -28,11 +28,11 @@ module.exports = {
 
         //var hName = "Hightlighted" || req.query.name;
         //console.log(hName);
-        var models =  await Event.find({
+        var models = await Event.find({
             limit: 4,
             where: { highlighted: true },
             sort: 'name'
-        })     
+        })
         //console.log("try = " + await Event.count());
         return res.view('event/index', { events: models });
     },
@@ -103,7 +103,7 @@ module.exports = {
         return res.ok("Event Deleted.");
 
     },
-search: async function (req, res) {
+    search: async function (req, res) {
         const sName = req.query.name || "";
         const sOrganizer = req.query.organizer || "";
         const sStartDate = req.query.startDate || "";
@@ -118,25 +118,22 @@ search: async function (req, res) {
         if (sStartDate != '') swhere['date'] = { '>=': sStartDate };
         if (sEndDate != '') swhere['date'] = { '<=': sEndDate };
         if (sVenue != '') swhere['venue'] = sVenue;
-
+        
         var models = await Event.find({
             where: swhere,
             sort: 'name',
             limit: numOfItemsPerPage,
             skip: numOfItemsPerPage * qPage
         });
-
+        
         var number = await Event.count({
             where: swhere,
         });
-
-        console.log("number = " + number) ;
-
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
 
         return res.view('event/search', { events: models, count: numOfPage });
 
-},
+    },
     searchResult: async function (req, res) {
 
         const qPage = Math.max(req.query.page - 1, 0) || 0;
@@ -151,7 +148,7 @@ search: async function (req, res) {
         var number = await Event.count({
             where: swhere,
         });
-        console.log("number result = " + number) ;
+        console.log("number result = " + number);
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
 
         return res.view('event/search', { events: models, count: numOfPage });

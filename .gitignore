@@ -130,3 +130,4 @@ lib-cov
 *.out
 *.pid
 
+api/controllers/EventController.js

@@ -104,6 +104,7 @@ module.exports = {
 
     },
     search: async function (req, res) {
+<<<<<<< HEAD
         const sName = req.query.name || "";
         const sOrganizer = req.query.organizer || "";
         const sStartDate = req.query.startDate || "";
@@ -138,18 +139,31 @@ module.exports = {
 
         const qPage = Math.max(req.query.page - 1, 0) || 0;
         const numOfItemsPerPage = 2;
+=======
+
+        var hName = "Hightlighted" || req.query.name;
+        const qPage = Math.max(req.query.page - 1, 0) || 0;
+        const numOfItemsPerPage = 2;
+       
+       
+        console.log(hName);
+>>>>>>> parent of 90fee0f... 01
         var models = await Event.find({
-            where: swhere,
+            where: { hightlig: { contains: hName } },
             sort: 'name',
             limit: numOfItemsPerPage,
             skip: numOfItemsPerPage * qPage
         });
 
+<<<<<<< HEAD
         var number = await Event.count({
             where: swhere,
         });
         console.log("number result = " + number);
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
+=======
+        var numOfPage = Math.ceil(await Event.count() / numOfItemsPerPage);
+>>>>>>> parent of 90fee0f... 01
 
         return res.view('event/search', { events: models, count: numOfPage });
     },

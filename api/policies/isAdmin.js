@@ -6,17 +6,19 @@ module.exports = async function (req, res, proceed) {
 
     //const message = sails.getInvalidIdMsg(req.params);
     //if (message) return res.badRequest(message); 
-    var model = await Person.findOne({ personname: "aUser02" }).populate('worksFor');
+    var model = await Person.findOne({ personname: req.session.username }).populate('worksFor');
 
-
-    console.log("--------------------");
-    console.log(model);
-    console.log("~~~~~~~~~~~~~~~~~~~~~");
-    var models = model.worksFor;
-    console.log(models.username);
+    
+    // console.log("--------------------");
+    // console.log(req.session.username);
+    // console.log("~~~~~~~~~~~~~~~~~~~~~");
+    // console.log(model.worksFor);
+    // console.log("?????????????????????");
+    // var models = model.worksFor;
+    // console.log(models[0].username);
      
 
-    if (req.session.username == 'aUser01') {
+    if (model.worksFor[0].username == 'admin') {
         return proceed();   //proceed to the next policy,
     }
 

@@ -28,7 +28,7 @@ module.exports.routes = {
     view: 'pages/homepage'
   },
 
-  '/' : 'EventController.index',
+  '/' : 'UserController.login',
  
 
   /***************************************************************************

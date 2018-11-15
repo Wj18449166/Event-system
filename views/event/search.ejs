@@ -1,28 +1,4 @@
 <!--search.ejs-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="http://localhost:1337">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" href="/Event/search">Search</a>
-            <a class="nav-item nav-link " href="/Event/create">Create</a>
-            <a class="nav-item nav-link " href="/Event/admin">Admin</a>
-        </div>
-    </div>
-</nav>
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Event Management System</h1>
-        <p class="lead">HKBU Event Management System is a web-based system for department and student
-            societies to boardcast events and activities as well as registration.
-        </p>
-    </div>
-</div>
-
-
 <!-- 日期范围问题  显示请选择一个的问题-->
 <% const current = parseInt(req.query.page) || 1; %>
 <!-- <%= current %> -->

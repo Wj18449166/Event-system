@@ -40,7 +40,7 @@ module.exports = {
     detail: async function (req, res) {
 
         var message = Event.getInvalidIdMsg(req.params);
-        console.log(message);
+       // console.log(message);
         if (message) return res.badRequest(message);
         var model = await Event.findOne(req.params.id);
         if (!model) return res.notFound();
@@ -64,7 +64,7 @@ module.exports = {
         if (req.method == "GET") {
             var model = await Event.findOne(req.params.id);
             if (!model) return res.notFound();
-            console.log(model.organizer);
+            //console.log(model.organizer);
             return res.view('event/update', { event: model });
         } else {
             if (typeof req.body.Event === "undefined")
@@ -148,7 +148,7 @@ module.exports = {
         var number = await Event.count({
             where: swhere,
         });
-        console.log("number result = " + number);
+        //console.log("number result = " + number);
         var numOfPage = Math.ceil(await number / numOfItemsPerPage);
 
         return res.view('event/search', { events: models, count: numOfPage });

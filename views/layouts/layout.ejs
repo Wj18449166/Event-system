@@ -44,79 +44,43 @@
         integrity="sha256-9w7XtQnqRDvThmsQHfLmXdDbGasYsSjF6FSXrDh7F6g=" crossorigin="anonymous" />
 </head>
 
-<body>
+<body onload="pageLoaded()">
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="container-fluid" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/Event/index" id="nav_home">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/Event/search" id="nav_search">Search</a>
+                    <a class="nav-item nav-link" style="display:none;" href="/Event/create" id="nav_create">Create</a>
+                    <a class="nav-item nav-link" style="display:none;" href="/Event/admin" id="nav_admin">Admin</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="nav-item nav-link" id="nav_username">
+                            <%=session.username%></a></li>
+                    <li><a class="nav-item nav-link" href="/User/logout">( Login out )</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Event Management System</h1>
+                <p class="lead">HKBU Event Management System is a web-based system for department and student
+                    societies to boardcast events and activities as well as registration.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <!-- <br><br> -->
         <%- body %>
     </div>
 
-
-
-    <!--
-        Client-side Templates
-        ========================
-
-        HTML templates are important prerequisites of modern, rich client applications.
-        To work their magic, frameworks like React, Vue.js, Angular, Ember, and Backbone
-        require that you load these templates client-side.
-
-        By default, your Gruntfile is configured to automatically load and precompile
-        client-side JST templates in your `assets/templates` folder, then
-        include them here automatically (between TEMPLATES and TEMPLATES END).
-
-        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
-        For example, here are a few things you could do:
-
-            + Import templates from other directories
-            + Use a different view engine (handlebars, dust, pug/jade, etc.)
-            + Internationalize your client-side templates using a server-side
-              stringfile before they're served.
-    -->
-
-    <!--TEMPLATES-->
-    
-    <!--TEMPLATES END-->
-
-
-    <!--
-        Server-side View Locals
-        ========================
-
-        Sometimes, it's convenient to get access to your server-side view locals from
-        client-side JavaScript.  This can improve page load times, remove the need for
-        extra AJAX requests, and make your client-side code easier to understand and
-        to maintain.  Sails provides a simple mechanism for accessing dynamic view
-        locals: the "exposeLocalsToBrowser()" view partial.
-
-        For more information on using this built-in feature, see:
-        https://sailsjs.com/docs/concepts/views/locals#?escaping-untrusted-data-using-exposelocalstobrowser
-
-    -->
-
-
-    <!--
-
-      Client-side Javascript
-      ========================
-
-      You can always bring in JS files manually with `script` tags, or asynchronously
-      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
-      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
-
-      By default, files in your `assets/js` folder are included here
-      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
-      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
-      and concatenated into a single file.
-
-      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-      For example, here are a few things you could do:
-
-          + Change the order of your scripts
-          + Import scripts from other directories
-          + Use a different preprocessor, like TypeScript
-
-    -->
 
     <!--SCRIPTS-->
     <script src="/dependencies/sails.io.js"></script>
@@ -135,6 +99,46 @@
             startDate: '-3d'
         });
     </script>
+    <script>
+        switch (window.location.pathname) {
+            case "/Event/index":
+                $("#nav_home").addClass("active");
+                break;
+            case "/Event/search":
+                $("#nav_search").addClass("active")
+                break;
+            case "/Event/create":
+                $("#nav_create").addClass("active");
+                break;
+            case "/Event/admin":
+                $("#nav_admin").addClass("active");
+                break;
+        }
+    </script>
+    <script>
+        function pageLoaded() {
+
+            //当用户属于admin，可以显示create和admin，未解决问题，只是简单用户匹配，不是匹配用的user类型
+            //var model = await Person.findOne({ personname: "<%= session.username %>" }).populate('worksFor');
+            //alert("<%= session.username %>");
+            if("<%= session.username %>" === "aUser01"){
+            //alert("this window.onload");
+              CreAdmView();
+            }  else if ("<%= session.username %>" === "aUser02") CreAdmView();  
+            
+            
+        }
+        
+        //create and admin 是否可见
+        function CreAdmView() {
+            
+                document.getElementById("nav_create").style.display = 'block';
+                document.getElementById("nav_admin").style.display = 'block';
+           
+        }
+
+    </Script>
+
 
 </body>
 

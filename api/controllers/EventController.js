@@ -167,24 +167,25 @@ module.exports = {
 
     //添加student和event的关联
     addEvent: async function (req, res) {
-       
+
         console.log("111111111111");
         var event = await Event.findOne(req.params.id);
-        console.log("999999999999");
-        var person = await Person.findOne(req.session.id);
-        console.log("222222222222");
+        console.log("event: " + event);
+        var person = await Person.findOne({ personname: req.session.username });
+        console.log("person: " + person);
         if (event.quote == 0 || event.quote < 0) {
             return res.ok("No Quote");
         }
         console.log("33333333333");
-        await Event.update(event.id.set({
+        await Event.update(req.params.id).set({
             quote: event.quote - 1
-        }))
+        })
         console.log("444444444444");
-        await Person.addToCollection(person.id, 'isregisted').members(event.id);
-        var model = await Person.findOne(person.id).populate('isregisted');
+        await Person.addToCollection(person.id, 'registerFor').members(event.id);
+        console.log("111111111111");
+        var model = await Person.findOne(person.id).populate('registerFor');
 
-        console.log("555555555555");
+        
         return res.ok('Operation completed.');
 
     },

@@ -9,9 +9,9 @@ module.exports = async function (req, res, proceed) {
     var model = await Person.findOne({ personname: req.session.username }).populate('worksFor');
 
     
-    // console.log("--------------------");
-    // console.log(req.session.username);
-    // console.log("~~~~~~~~~~~~~~~~~~~~~");
+     console.log("--------------------");
+     console.log(req.session.username);
+     console.log("~~~~~~~~~~~~~~~~~~~~~");
      console.log(model);
     // console.log("?????????????????????");
     // var models = model.worksFor;

@@ -58,6 +58,7 @@
                     <a class="nav-item nav-link" href="/Event/search" id="nav_search">Search</a>
                     <a class="nav-item nav-link" style="display:none;" href="/Event/create" id="nav_create">Create</a>
                     <a class="nav-item nav-link" style="display:none;" href="/Event/admin" id="nav_admin">Admin</a>
+                    <a class="nav-item nav-link" style="display:none;" href="/Event/mrevent" id="nav_mrevent">My Registered Events</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="nav-item nav-link" id="nav_username">
@@ -125,6 +126,9 @@
             //alert("this window.onload");
               CreAdmView();
             }  else if ("<%= session.username %>" === "aUser02") CreAdmView();  
+            else if("<%= session.username %>" === "sUser01") mrEventView();
+            else if("<%= session.username %>" === "sUser02") mrEventView();
+
             
             
         }
@@ -135,6 +139,10 @@
                 document.getElementById("nav_create").style.display = 'block';
                 document.getElementById("nav_admin").style.display = 'block';
            
+        }
+
+        function mrEventView(){
+            document.getElementById("nav_mrevent").style.display = 'block';
         }
 
     </Script>

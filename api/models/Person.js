@@ -32,7 +32,14 @@ module.exports = {
     worksFor: {
       collection: 'User',
       via: 'supervises'
+    },
+
+    registerFor: {
+      collection: 'Event',
+      via: 'isregisted'
     }
+
+
 
   },
 

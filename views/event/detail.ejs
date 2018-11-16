@@ -27,6 +27,9 @@
                         <li class="list-group-item"><b>Quota: </b>
                             <%= event.quote %>
                         </li>
+                        <form action="httP://localhost:1337/event/addEvent/<%= event.id %>" method="POST">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
                     </ul>
                 </div>
             </div>

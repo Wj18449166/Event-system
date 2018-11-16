@@ -40,7 +40,7 @@ module.exports = {
     detail: async function (req, res) {
 
         var message = Event.getInvalidIdMsg(req.params);
-       // console.log(message);
+        // console.log(message);
         if (message) return res.badRequest(message);
         var model = await Event.findOne(req.params.id);
         if (!model) return res.notFound();
@@ -118,14 +118,14 @@ module.exports = {
         if (sStartDate != '') swhere['date'] = { '>=': sStartDate };
         if (sEndDate != '') swhere['date'] = { '<=': sEndDate };
         if (sVenue != '') swhere['venue'] = sVenue;
-        
+
         var models = await Event.find({
             where: swhere,
             sort: 'name',
             limit: numOfItemsPerPage,
             skip: numOfItemsPerPage * qPage
         });
-        
+
         var number = await Event.count({
             where: swhere,
         });
@@ -153,6 +153,44 @@ module.exports = {
 
         return res.view('event/search', { events: models, count: numOfPage });
     },
+    //显示用户的注册信息，针对student的用户
+    mrevent: async function (req, res) {
+
+        var models = await Event.find({
+            limit: 3,
+            where: { highlighted: true },
+            sort: 'name'
+        })
+
+        return res.view('event/index', { events: models });
+    },
+
+    //添加student和event的关联
+    addEvent: async function (req, res) {
+       
+        console.log("111111111111");
+        var event = await Event.findOne(req.params.id);
+        console.log("999999999999");
+        var person = await Person.findOne(req.session.id);
+        console.log("222222222222");
+        if (event.quote == 0 || event.quote < 0) {
+            return res.ok("No Quote");
+        }
+        console.log("33333333333");
+        await Event.update(event.id.set({
+            quote: event.quote - 1
+        }))
+        console.log("444444444444");
+        await Person.addToCollection(person.id, 'isregisted').members(event.id);
+        var model = await Person.findOne(person.id).populate('isregisted');
+
+        console.log("555555555555");
+        return res.ok('Operation completed.');
+
+    },
+
+
+
 
 
 };

@@ -45,7 +45,7 @@ module.exports = {
     highlighted: {
       type: 'boolean',
       defaultsTo: false
-    }
+    },
 
 
 
@@ -58,6 +58,11 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    isregisted: {
+      collection: 'Person',
+      via: 'registerFor'
+    }
+
 
     
 

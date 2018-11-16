@@ -1,0 +1,17 @@
+<!--mrevent.ejs-->
+<div class="row">
+        <% events.forEach( function(model){ %>
+        <div class="card col-12 col-sm-12 col-lg-6 col-xl-6 ">
+            <h5><a href="/Event/detail/<%= model.id %>">
+                    <%= model.name %></a></h5>
+            <div class="row">
+                <div class="col-6">
+                    <img class="img-fluid img-thumbnail" src="<%= model.imgURL %>">
+                </div>
+                <div class="col-6">
+                    <p><%= model.shortDes %></p>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>

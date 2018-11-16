@@ -12,7 +12,7 @@ module.exports = async function (req, res, proceed) {
     // console.log("--------------------");
     // console.log(req.session.username);
     // console.log("~~~~~~~~~~~~~~~~~~~~~");
-    // console.log(model.worksFor);
+     console.log(model);
     // console.log("?????????????????????");
     // var models = model.worksFor;
     // console.log(models[0].username);

@@ -21,7 +21,8 @@ module.exports = {
 
         await Event.create(req.body.Event);
 
-        return res.ok("Successfully created!");
+        //return res.ok("Successfully created!");
+        return res.redirect('/event/index');
     },
 
     index: async function (req, res) {
@@ -44,7 +45,10 @@ module.exports = {
         if (message) return res.badRequest(message);
         var model = await Event.findOne(req.params.id);
         if (!model) return res.notFound();
-        return res.view('event/detail', { event: model });
+        //查询该项目注册的学生
+        var registermodel = await Event.findOne(req.params.id).populate('isregisted');
+        console.log(registermodel.isregisted);
+        return res.view('event/detail', { event: model, register: registermodel.isregisted });
 
     },
 
@@ -153,42 +157,9 @@ module.exports = {
 
         return res.view('event/search', { events: models, count: numOfPage });
     },
-    //显示用户的注册信息，针对student的用户
-    mrevent: async function (req, res) {
+    
 
-        var models = await Event.find({
-            limit: 3,
-            where: { highlighted: true },
-            sort: 'name'
-        })
-
-        return res.view('event/index', { events: models });
-    },
-
-    //添加student和event的关联
-    addEvent: async function (req, res) {
-
-        console.log("111111111111");
-        var event = await Event.findOne(req.params.id);
-        console.log("event: " + event);
-        var person = await Person.findOne({ personname: req.session.username });
-        console.log("person: " + person);
-        if (event.quote == 0 || event.quote < 0) {
-            return res.ok("No Quote");
-        }
-        console.log("33333333333");
-        await Event.update(req.params.id).set({
-            quote: event.quote - 1
-        })
-        console.log("444444444444");
-        await Person.addToCollection(person.id, 'registerFor').members(event.id);
-        console.log("111111111111");
-        var model = await Person.findOne(person.id).populate('registerFor');
-
-        
-        return res.ok('Operation completed.');
-
-    },
+    
 
 
 

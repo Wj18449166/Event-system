@@ -1,41 +1,97 @@
 <!-- deatail.ejs -->
-<div class="row">
-    <div class="card col-sm-12 col-lg-12 col-xl-12">
-        <div class="card-body">
-            <h4>
-                <%= event.name %>
-            </h4>
-            <div class="media">
-                <img class="mr-3" src="<%= event.imgURL %>" style="max-width: 15rem">
-                <div class="media-body">
-                    <ul class="card list-group list-group-flush">
-                        <li class="list-group-item">
-                            <%= event.fullDes %>
-                        </li>
-                        <li class="list-group-item"><b>Organizer: </b>
-                            <%= event.organizer %>
-                        </li>
-                        <li class="list-group-item"><b>Date: </b>
-                            <%= event.eventDate %>
-                        </li>
-                        <li class="list-group-item"><b>Time: </b>
-                            <%= event.time %>
-                        </li>
-                        <li class="list-group-item"><b>Venue: </b>
-                            <%= event.venue %>
-                        </li>
-                        <li class="list-group-item"><b>Quota: </b>
-                            <%= event.quote %>
-                        </li>
-                        <form method="POST" action="/event/delete/<%= event.id %>">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                        <form action="http://localhost:1337/Event/addEvent/<%= event.id %>" method="POST">
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </form>
-                    </ul>
+
+<body onload="pageShow()">
+
+    <div class="row">
+        <div class="card col-sm-12 col-lg-12 col-xl-12">
+            <div class="card-body">
+                <h4>
+                    <%= event.name %>
+                </h4>
+                <div class="media">
+                    <img class="mr-3" src="<%= event.imgURL %>" style="max-width: 15rem">
+                    <div class="media-body">
+                        <ul class="card list-group list-group-flush">
+                            <li class="list-group-item">
+                                <%= event.fullDes %>
+                            </li>
+                            <li class="list-group-item"><b>Organizer: </b>
+                                <%= event.organizer %>
+                            </li>
+                            <li class="list-group-item"><b>Date: </b>
+                                <%= event.eventDate %>
+                            </li>
+                            <li class="list-group-item"><b>Time: </b>
+                                <%= event.time %>
+                            </li>
+                            <li class="list-group-item"><b>Venue: </b>
+                                <%= event.venue %>
+                            </li>
+                            <li class="list-group-item"><b>Quota: </b>
+                                <%= event.quote %>
+                            </li>
+                            <form action="/person/addEvent/<%= event.id %>" method="POST">
+                                <button id="butt_register" style="display:none;" type="submit" class="btn btn-primary">Register</button>
+                            </form>
+                            <form action="/person/deleteEvent/<%= event.id %>" method="POST">
+                                <button id="butt_delete" style="display:none;" type="submit" class="btn btn-primary">Delete</button>
+                            </form>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!--admin.ejs-->
+    <table id="tab_register" class="table table-striped" style="display:none">
+        <h5>Register List</h5>
+        <% register.forEach( function(model) { %>
+        <tr>
+            <td>
+                <%= model.personname %>
+            </td>
+        </tr>
+        <% }); %>
+    </table>
+
+
+</body>
+
+<script>
+    //window.onload = pageShow();
+    // function pageShow() {
+
+    //     //alert("this window.onload");
+
+    //     //if ("<%= session.username %>" === "aUser01") { alert("can display"); isShowRegisterList(); }
+    //     //else if ("<%= session.username %>" === "aUser02") isShowRegisterList();
+    //     //else if ("<%= session.username %>" === "sUser01") isShowRegistwr();
+    //     //else if ("<%= session.username %>" === "sUser02") isShowRegistwr();
+    // }
+
+    // function isShowRegistwr() {
+        
+    //     var isRegister = 0;
+       
+    //     let length = "<%=register.length%>";    
+    //     // for(i=0;i<length;i++)
+    //     // {
+    //     //     if("<% =register[i].personname %>" === "<%= session.username %>" ) 
+    //     //      isRegister = 1;
+    //     // }
+    //     // alert(isRegister);
+    //     if (isRegister == 0) {
+    //         document.getElementById("butt_register").style.display = 'block';
+    //     }
+    //     else
+    //         document.getElementById("butt_register").style.display = 'block';
+
+
+    // }
+
+    // function isShowRegisterList() {
+    //     document.getElementById("tab_register").style.display = 'block';
+    // }
+
+</Script>

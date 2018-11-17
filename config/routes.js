@@ -54,7 +54,8 @@ module.exports.routes = {
    'POST /event/update/:id': 'EventController.update',
 
    'POST /event/delete/:id': 'EventController.delete',
-   'POST /event/addEvent/:id': 'EventController.addEvent',
+   'POST /person/addEvent/:id': 'PersonController.addEvent',
+   'POST /person/deleteEvent/:id': 'PersonController.deleteEvent',
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗

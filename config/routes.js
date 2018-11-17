@@ -51,9 +51,10 @@ module.exports.routes = {
    //'GET /person/view/:id': 'PersonController.view',
 
    'GET /event/update/:id': 'EventController.update',
-   'POST /event/update/:id': 'EventController.update',
+   'POST /event/:id': 'EventController.update',
+  
 
-   'POST /event/delete/:id': 'EventController.delete',
+   'DELETE /event/:id': 'EventController.delete',
    'POST /person/addEvent/:id': 'PersonController.addEvent',
    'POST /person/deleteEvent/:id': 'PersonController.deleteEvent',
 

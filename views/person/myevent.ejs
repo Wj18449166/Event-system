@@ -11,7 +11,9 @@
             <div class="media-body">
                 <ul class="card list-group list-group-flush">
                     <li class="list-group-item"><b>Date: </b>
-                        <%= model.eventDate %>
+                        <%= model.eventDate.getDate() %>/
+                        <%= model.eventDate.getMonth() + 1 %>/
+                        <%= model.eventDate.getFullYear() %>
                     </li>
                     <li class="list-group-item"><b>Time: </b>
                         <%= model.time %>

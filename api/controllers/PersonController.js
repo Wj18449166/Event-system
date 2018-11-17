@@ -12,19 +12,29 @@ module.exports = {
 
 
         var event = await Event.findOne(req.params.id);
-        console.log("event: " + event);
+        //console.log("event: " + event);
         var person = await Person.findOne({ personname: req.session.username });
-        console.log("person: " + person);
+        //console.log("person: " + person);
         if (event.quote == 0 || event.quote < 0) {
             return res.ok("No Quote");
         }
-        //console.log("33333333333");
+        //console.log("111111111111");
+        // 查找当前项目中是否有当前人员已经注册,无法出现弹窗？？？？？
+        // var register = await Event.findOne(req.params.id).populate('isregisted');
+        // var number = register.isregisted.length;
+        // console.log("number =" + number);
+        // for (var i = 0; i < number; i++) {
+        //     if (register.isregisted[i].personname == req.session.username) {
+        //         return res.redirect('/person/myevent');
+        //     }
+        // }
+
         await Event.update(req.params.id).set({
             quote: event.quote - 1
         })
-        //console.log("444444444444");
+
         await Person.addToCollection(person.id, 'registerFor').members(event.id);
-        //console.log("111111111111");
+
         //var model = await Person.findOne(person.id).populate('registerFor');
         return res.redirect('/person/myevent');
 

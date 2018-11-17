@@ -1,6 +1,6 @@
 <!-- deatail.ejs -->
 
-<body onload="pageShow()">
+<body>
 
     <div class="row">
         <div class="card col-sm-12 col-lg-12 col-xl-12">
@@ -19,7 +19,9 @@
                                 <%= event.organizer %>
                             </li>
                             <li class="list-group-item"><b>Date: </b>
-                                <%= event.eventDate %>
+                                <%= event.eventDate.getDate() %>/
+                                <%= event.eventDate.getMonth() + 1 %>/
+                                <%= event.eventDate.getFullYear() %>
                             </li>
                             <li class="list-group-item"><b>Time: </b>
                                 <%= event.time %>
@@ -30,67 +32,42 @@
                             <li class="list-group-item"><b>Quota: </b>
                                 <%= event.quote %>
                             </li>
+                            <!-- 根据传进来的数据，判断显示的内容,当 isregister 等于0，该用户没有注册该项目，当等于1，该用户注册该项目-->
+                            <% if(isregister  == 0 & (session.username  == "sUser01" || session.username  == "sUser02")) {%>
                             <form action="/person/addEvent/<%= event.id %>" method="POST">
-                                <button id="butt_register" style="display:none;" type="submit" class="btn btn-primary">Register</button>
+                                <button id="butt_register" type="submit" class="btn btn-primary">Register</button>
                             </form>
+                            <%} else if(isregister  == 1 & (session.username  == "sUser01" || session.username  == "sUser02")) {%>
                             <form action="/person/deleteEvent/<%= event.id %>" method="POST">
-                                <button id="butt_delete" style="display:none;" type="submit" class="btn btn-primary">Delete</button>
+                                <button id="butt_delete" type="submit" class="btn btn-primary">Delete</button>
                             </form>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!--admin.ejs-->
-    <table id="tab_register" class="table table-striped" style="display:none">
-        <h5>Register List</h5>
+    <% if(session.username  == "aUser01" || session.username  == "aUser02") {%>
+    <table id="tab_register" class="table table-striped">
+        <tr>
+            <th>Register List</th>
+        </tr>
         <% register.forEach( function(model) { %>
         <tr>
             <td>
                 <%= model.personname %>
             </td>
         </tr>
+        <% }); %>
     </table>
-
+    <%} 
+    %>
 
 </body>
 
 <script>
-    //window.onload = pageShow();
-    // function pageShow() {
 
-    //     //alert("this window.onload");
-
-    //     //if ("<%= session.username %>" === "aUser01") { alert("can display"); isShowRegisterList(); }
-    //     //else if ("<%= session.username %>" === "aUser02") isShowRegisterList();
-    //     //else if ("<%= session.username %>" === "sUser01") isShowRegistwr();
-    //     //else if ("<%= session.username %>" === "sUser02") isShowRegistwr();
-    // }
-
-    // function isShowRegistwr() {
-        
-    //     var isRegister = 0;
-       
-    //     let length = "<%=register.length%>";    
-    //     // for(i=0;i<length;i++)
-    //     // {
-    //     //     if("<% =register[i].personname %>" === "<%= session.username %>" ) 
-    //     //      isRegister = 1;
-    //     // }
-    //     // alert(isRegister);
-    //     if (isRegister == 0) {
-    //         document.getElementById("butt_register").style.display = 'block';
-    //     }
-    //     else
-    //         document.getElementById("butt_register").style.display = 'block';
-
-
-    // }
-
-    // function isShowRegisterList() {
-    //     document.getElementById("tab_register").style.display = 'block';
-    // }
 
 </Script>

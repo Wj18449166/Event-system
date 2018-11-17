@@ -1,6 +1,6 @@
 <!--update.ejs-->
 <form action="/event/update/<%= event.id %>" method="POST">
-       <div class="row">
+    <div class="row">
         <div class="col-12 col-sm-12 col-lg-6 col-xl-6">
             <label>Event name</label>
             <input type="text" , class="form-control" name="Event[name]" value="<%= event.name %>" required>
@@ -56,13 +56,13 @@
     </div>
 </form>
 
-<form method="POST" action="/event/delete/<%= event.id %>">
+<!-- <form method="POST" action="/event/delete/<%= event.id %>">
     <button class="btn btn-danger" type="submit">Delete</button>
-</form>
+</form> -->
+<button class="btn btn-danger" type="button" onclick="deleteEvent('<%= event.id %>')">Delete</button>
 
 
 <script>
-    //载入的时候造成标题栏缺少两项换一个函数
     window.onload = function () {
         //alert("this window.onload");
         $("#organizer").val("<%= event.organizer %>");
@@ -70,13 +70,35 @@
         if ("<%= event.highlighted %>") {
             $("#highlighted").attr("checked", true);
         }
+        document.getElementById("nav_create").style.display = 'block';
+        document.getElementById("nav_admin").style.display = 'block';
 
     };
-    // $(function () {
-    //     if ("<%= event.highlighted %>") {
-    //         $("#highlighted").attr("checked", true);
-    //     }
-    //     $("#organizer").val("<%= event.organizer %>");
-    //     $("#venue").val("<%= event.venue %>");
-    // });
+
+    async function deleteEvent(id) {
+
+        var dr = document.getElementById("deleteResult");
+
+        var r = confirm("Confirm Delete?");
+        if (r == true) {
+
+            var response = await fetch("/event/" + id, {
+                method: "DELETE",
+                credentials: 'same-origin',
+            });
+
+            console.log(response);
+
+            if (response.status == 200) {
+                var data = await response.json();
+                dr.innerHTML = data;
+            } else {
+                dr.innerHTML = response.statusText;
+            }
+
+        } else {
+            dr.innerHTML = "cancelled";
+        }
+
+    };
 </script>

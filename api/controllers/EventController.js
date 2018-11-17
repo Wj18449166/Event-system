@@ -45,10 +45,26 @@ module.exports = {
         if (message) return res.badRequest(message);
         var model = await Event.findOne(req.params.id);
         if (!model) return res.notFound();
-        //查询该项目注册的学生
+
+        //查询该项目注册的学生，regisstermodel是学生的队列
         var registermodel = await Event.findOne(req.params.id).populate('isregisted');
-        console.log(registermodel.isregisted);
-        return res.view('event/detail', { event: model, register: registermodel.isregisted });
+        //console.log(registermodel.isregisted);
+        
+        var isregister = 0;
+        var length = registermodel.isregisted.length;
+        
+        //console.log(registermodel.isregisted.length);
+
+        for(var i=0 ;i<length; i++){
+            //当当前项目注册的学生中有当前的用户，证明该用户已经注册过这个项目
+            //console.log(registermodel.isregisted[i].personname);
+            //console.log(req.session.username);
+            if(registermodel.isregisted[i].personname == req.session.username){
+                isregister = 1;     
+            }           
+        }
+
+        return res.view('event/detail', { event: model, register: registermodel.isregisted, isregister:isregister });
 
     },
 

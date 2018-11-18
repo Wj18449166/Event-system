@@ -49,22 +49,22 @@ module.exports = {
         //查询该项目注册的学生，regisstermodel是学生的队列
         var registermodel = await Event.findOne(req.params.id).populate('isregisted');
         //console.log(registermodel.isregisted);
-        
+
         var isregister = 0;
         var length = registermodel.isregisted.length;
-        
+
         //console.log(registermodel.isregisted.length);
 
-        for(var i=0 ;i<length; i++){
+        for (var i = 0; i < length; i++) {
             //当当前项目注册的学生中有当前的用户，证明该用户已经注册过这个项目
             //console.log(registermodel.isregisted[i].personname);
             //console.log(req.session.username);
-            if(registermodel.isregisted[i].personname == req.session.username){
-                isregister = 1;     
-            }           
+            if (registermodel.isregisted[i].personname == req.session.username) {
+                isregister = 1;
+            }
         }
 
-        return res.view('event/detail', { event: model, register: registermodel.isregisted, isregister:isregister });
+        return res.view('event/detail', { event: model, register: registermodel.isregisted, isregister: isregister });
 
     },
 
@@ -87,26 +87,31 @@ module.exports = {
             //console.log(model.organizer);
             return res.view('event/update', { event: model });
         } else {
-            if (typeof req.body.Event === "undefined")
-                return res.badRequest("Form-data not received.");
+            // if (typeof req.body.Event === "undefined")
+            //     return res.badRequest("Form-data not received.");
+
+
+            console.log("PUT");
 
             var models = await Event.update(req.params.id).set({
-                name: req.body.Event.name,
-                shortDes: req.body.Event.shortDes,
-                fullDes: req.body.Event.fullDes,
-                imgURL: req.body.Event.imgURL,
-                organizer: req.body.Event.organizer,
-                eventDate: req.body.Event.eventDate,
-                time: req.body.Event.time,
-                venue: req.body.Event.venue,
-                quote: req.body.Event.quote,
-                highlighted: req.body.Event.highlighted || false,
-
+                name: req.body.name,
+                shortDes: req.body.shortDes,
+                fullDes: req.body.fullDes,
+                imgURL: req.body.imgURL,
+                organizer: req.body.organizer,
+                eventDate: req.body.eventDate,
+                time: req.body.time,
+                venue: req.body.venue,
+                quote: req.body.quote,
+                highlighted: req.body.highlighted || false,
                 //    age: req.body.Event.age
             }).fetch();
 
-            if (models.length == 0) return res.notFound();
-            return res.ok("Record updated");
+            console.log("~~~~~~~~~~~~");
+
+            // if (models.length == 0) return res.notFound();
+            if (req.wantsJSON) 
+            return res.redirect('/event/admin');
 
         }
     },
@@ -120,7 +125,8 @@ module.exports = {
         var models = await Event.destroy(req.params.id).fetch();
         if (models.length == 0) return res.notFound();
 
-        return res.ok("Event Deleted.");
+        if (req.wantsJSON)
+        return res.redirect('/event/admin');
 
     },
     search: async function (req, res) {
@@ -173,9 +179,9 @@ module.exports = {
 
         return res.view('event/search', { events: models, count: numOfPage });
     },
-    
 
-    
+
+
 
 
 

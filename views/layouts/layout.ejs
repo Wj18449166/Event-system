@@ -58,12 +58,18 @@
                     <a class="nav-item nav-link" href="/Event/search" id="nav_search">Search</a>
                     <a class="nav-item nav-link" style="display:none;" href="/Event/create" id="nav_create">Create</a>
                     <a class="nav-item nav-link" style="display:none;" href="/Event/admin" id="nav_admin">Admin</a>
-                    <a class="nav-item nav-link" style="display:none;" href="/Person/myevent" id="nav_mrevent">My Registered Events</a>
+                    <a class="nav-item nav-link" style="display:none;" href="/Person/myevent" id="nav_mrevent">My
+                        Registered Events</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="nav-item nav-link" id="nav_username">
                             <%=session.username%></a></li>
-                    <li><a class="nav-item nav-link" href="/User/logout">( Login out )</a></li>
+                    <% if(session.username  == "aUser01" || session.username  == "aUser02" || session.username  == "sUser01" || session.username  == "sUser02" ||session.username  == "eUser01" || session.username  == "eUser02") {%>
+                        <li><a class="nav-item nav-link" href="/User/logout">( Login out )</a></li>
+                    <%} else  {%>
+                        <li><a class="nav-item nav-link" href="/User/login">( Login in )</a></li>
+                    <% } %>
+                    
                 </ul>
             </div>
         </nav>
@@ -120,28 +126,28 @@
         function pageLoaded() {
 
             //当用户属于admin，可以显示create和admin，未解决问题，只是简单用户匹配，不是匹配用的user类型
-            //var model = await Person.findOne({ personname: "<%= session.username %>" }).populate('worksFor');
+            // var model = await Person.findOne({ personname: "<%= session.username %>" }).populate('worksFor');
             //alert("<%= session.username %>");
-            if("<%= session.username %>" === "aUser01"){
-            //alert("this window.onload");
-              CreAdmView();
-            }  else if ("<%= session.username %>" === "aUser02") CreAdmView();  
-            else if("<%= session.username %>" === "sUser01") mrEventView();
-            else if("<%= session.username %>" === "sUser02") mrEventView();
+            if ("<%= session.username %>" === "aUser01") {
+                //alert("this window.onload");
+                CreAdmView();
+            } else if ("<%= session.username %>" === "aUser02") CreAdmView();
+            else if ("<%= session.username %>" === "sUser01") mrEventView();
+            else if ("<%= session.username %>" === "sUser02") mrEventView();
 
-            
-            
+
+
         }
-        
+
         //create and admin 是否可见
         function CreAdmView() {
-            
-                document.getElementById("nav_create").style.display = 'block';
-                document.getElementById("nav_admin").style.display = 'block';
-           
+
+            document.getElementById("nav_create").style.display = 'block';
+            document.getElementById("nav_admin").style.display = 'block';
+
         }
         //myEvent 是否可见
-        function mrEventView(){
+        function mrEventView() {
             document.getElementById("nav_mrevent").style.display = 'block';
         }
 

@@ -1,26 +1,26 @@
 <!--update.ejs-->
-<form action="/event/update/<%= event.id %>" method="POST">
+<form action="/event/update/<%= event.id %>" method="PUT" onsubmit="updateEvent(this);return false">
     <div class="row">
         <div class="col-12 col-sm-12 col-lg-6 col-xl-6">
             <label>Event name</label>
-            <input type="text" , class="form-control" name="Event[name]" value="<%= event.name %>" required>
+            <input type="text" , class="form-control" name="name" value="<%= event.name %>" required>
             <br>
             <label>Short Description</label>
-            <textarea rows="7" class="form-control" name="Event[shortDes]" required><%= event.shortDes %></textarea>
+            <textarea rows="7" class="form-control" name="shortDes" required><%= event.shortDes %></textarea>
             <br>
             <label>Full Description</label>
-            <textarea rows="9" class="form-control" name="Event[fullDes]" required><%= event.fullDes %></textarea>
+            <textarea rows="9" class="form-control" name="fullDes" required><%= event.fullDes %></textarea>
 
         </div>
 
         <div class="col-12 col-sm-12 col-lg-6 col-xl-6">
 
             <label>Image URL</label>
-            <input type="text" , class="form-control" name="Event[imgURL]" value="<%= event.imgURL %>" required><br>
+            <input type="text" , class="form-control" name="imgURL" value="<%= event.imgURL %>" required><br>
 
             <div class="form-group">
                 <label for="organizer">Organizer</label>
-                <select class="form-control" name="Event[organizer]" id="organizer">
+                <select class="form-control" name="organizer" id="organizer">
                     <option> ABC</option>
                     <option> ACB</option>
                 </select>
@@ -28,15 +28,14 @@
             <%= event.organizer %>
 
             <label>Event Date</label>
-            <div><input type="text" class="form-control mydate" name="Event[eventDate]" value="<%= event.eventDate %>" /></div><br>
-
-
+            <div><input type="text" class="form-control mydate" name="eventDate" 
+                value="<%= event.eventDate.getDate() %>/<%= event.eventDate.getMonth() + 1 %>/<%= event.eventDate.getFullYear() %>" /></div><br>
             <label>Time</label>
-            <input type="text" , class="form-control" name="Event[time]" value="<%= event.time %>" required><br>
+            <input type="text" , class="form-control" name="time" value="<%= event.time %>" required><br>
 
             <div class="form-group">
                 <label for="venue">Venue</label>
-                <select class="form-control" name="Event[venue]" id="venue">
+                <select class="form-control" name="venue" id="venue">
                     <option>Kowloon</option>
                     <option>N.T</option>
                     <option>Hong Kong Island</option>
@@ -44,13 +43,16 @@
             </div>
 
             <label>Quote</label>
-            <input type="number" , class="form-control" name="Event[quote]" value="<%= event.quote %>" required><br>
+            <input type="number" , class="form-control" name="quote" value="<%= event.quote %>" required><br>
+
 
             <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="highlighted" name="Event[highlighted]" value="true">
+                <input type="checkbox" class="form-check-input" id="highlighted" name="highlighted" value="true">
                 <label class="form-check-label" for="highlighted">Highlighted Event</label>
             </div>
 
+            <!-- <button class="btn btn-primary" type="button" onclick="updateEvent('<%= event.id %>')">Submit</button> -->
+            <!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
@@ -87,9 +89,11 @@
                 credentials: 'same-origin',
             });
 
-            console.log(response);
+            //var r = confirm("Confirm Delete?");
 
-            if (response.status == 200) {
+            if (response.redirected) {
+                window.location = response.url;
+            } else if (response.status == 200) {
                 var data = await response.json();
                 dr.innerHTML = data;
             } else {
@@ -98,6 +102,35 @@
 
         } else {
             dr.innerHTML = "cancelled";
+        }
+
+    };
+
+    async function updateEvent(oFormElement) {
+
+        //var r = confirm("Confirm Update?");
+
+        var response = await fetch(oFormElement.action, {
+            method: "PUT",
+            credentials: 'same-origin',
+            body: new FormData(oFormElement),
+        });
+
+        // var r = confirm("Confirm Delete?");
+
+        //console.log(response);
+
+        if (response.redirected) {
+            window.location = response.url;
+        } else if (response.status == 200) {
+            var data = await response.json();
+            alert(data);
+            location.reload(true);
+        } else if (response.status == 401) {
+            var data = await response.text();
+            alert(data);
+        } else {
+            alert(response.statusText);
         }
 
     };

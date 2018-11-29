@@ -33,6 +33,11 @@ module.exports.security = {
   //   allowOrigins: '*',
   //   allowCredentials: false,
   // },
+  cors: {
+    allRoutes: true,
+    allowOrigins: 'http://localhost:8100',
+    allowCredentials: true,
+  },
 
 
   /****************************************************************************

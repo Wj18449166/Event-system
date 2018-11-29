@@ -19,6 +19,11 @@ module.exports = {
         if (typeof req.body.Event === "undefined")
             return res.badRequest("Form-data not received.");
 
+        //解决日期创建的时候更换格式
+        //req.body.Event.startDate =  new Date (req.body.Event.startDate);
+
+
+
         await Event.create(req.body.Event);
 
         //return res.ok("Successfully created!");
@@ -35,7 +40,12 @@ module.exports = {
             sort: 'name'
         })
         //console.log("try = " + await Event.count());
-        return res.view('event/index', { events: models });
+        if (req.wantsJSON) {
+            return res.json({ events: models });
+        } else {
+            return res.view('event/index', { events: models });
+        }
+
     },
 
     detail: async function (req, res) {
@@ -63,8 +73,12 @@ module.exports = {
                 isregister = 1;
             }
         }
-
-        return res.view('event/detail', { event: model, register: registermodel.isregisted, isregister: isregister });
+        if (req.wantsJSON) {
+            return res.json({ event: model });
+        } else {
+            return res.view('event/detail', { event: model, register: registermodel.isregisted, isregister: isregister });
+        }
+        
 
     },
 
@@ -110,8 +124,8 @@ module.exports = {
             console.log("~~~~~~~~~~~~");
 
             // if (models.length == 0) return res.notFound();
-            if (req.wantsJSON) 
-            return res.redirect('/event/admin');
+            if (req.wantsJSON)
+                return res.redirect('/event/admin');
 
         }
     },
@@ -126,7 +140,7 @@ module.exports = {
         if (models.length == 0) return res.notFound();
 
         if (req.wantsJSON)
-        return res.redirect('/event/admin');
+            return res.redirect('/event/admin');
 
     },
     search: async function (req, res) {

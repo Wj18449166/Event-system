@@ -58,11 +58,13 @@ module.exports = {
 
         //根据当前用户的id查找用户注册的event
         var model = await Person.findOne({ personname: req.session.username }).populate('registerFor');
-        //console.log("~~~~~~~~~~~~~~~~~~~~~");
-        //console.log(model);
 
         //显示event
+        if (req.wantsJSON)  {
+            return res.json(model.registerFor);
+        } else {
         return res.view('person/myevent', { event: model.registerFor });
+        }
     },
 
 

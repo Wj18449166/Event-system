@@ -15,17 +15,10 @@ module.exports = {
         //console.log("event: " + event);
         var person = await Person.findOne({ personname: req.session.username });
         //console.log("person: " + person);
-        if (event.quote == 0 || event.quote < 0) {
-            if (req.wantsJSON) {
-                return res.json({ results: "No Quote" });
-            }
-            else {
-                return res.ok("No Quote");
-            }
-        }
-         //查询该项目注册的学生，regisstermodel是学生的队列
-         var registermodel = await Event.findOne(req.params.id).populate('isregisted');
-         var length = registermodel.isregisted.length;
+
+        //查询该项目注册的学生，regisstermodel是学生的队列
+        var registermodel = await Event.findOne(req.params.id).populate('isregisted');
+        var length = registermodel.isregisted.length;
 
         for (var i = 0; i < length; i++) {
             //当前项目注册的学生中有当前的用户，证明该用户已经注册过这个项目
@@ -33,6 +26,15 @@ module.exports = {
                 if (req.wantsJSON) {
                     return res.json({ results: "You have registered!" });
                 }
+            }
+        }
+
+        if (event.quote == 0 || event.quote < 0) {
+            if (req.wantsJSON) {
+                return res.json({ results: "No Quote" });
+            }
+            else {
+                return res.ok("No Quote");
             }
         }
 
@@ -47,7 +49,7 @@ module.exports = {
             return res.json({ results: "OK" });
         }
         else {
-        return res.redirect('/person/myevent');
+            return res.redirect('/person/myevent');
         }
 
     },

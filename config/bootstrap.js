@@ -20,11 +20,16 @@ module.exports.bootstrap = async function (done) {
     //{ name: "Martin Choy", age: 23 },
     //{ name: "Kenny Cheng", age: 22 }
     // etc.
-    { name: "activity01", shortDes: "岳岳", fullDes: "岳岳，7月11日出生于北京市,中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fvgf3xldckj32il3yub2c.jpg", organizer: "ACB", eventDate: new Date('1992/07/11'), time: "12", venue: "WLB", quote: 2, highlighted: true },
-    { name: "activity011", shortDes: "木子洋", fullDes: "木子洋，1994年4月21日出生，中国内地男歌手、模特，男子组合ONER成员。", imgURL:"https://wx3.sinaimg.cn/mw690/0077x9VPly1fvgf48qxwxj32753wpkjr.jpg", organizer: "ACB", eventDate: new Date('1994/04/21'), time: "12", venue: "POD", quote: 4, highlighted: true },
-    { name: "activity02", shortDes: "灵超", fullDes: "灵超，2001年1月9日出生于中国河北省，中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fvgf4oau8lj31nr2y7hdt.jpg", organizer: "ACB", eventDate: new Date('2001/01/01'), time: "12", venue: "SWT501", quote: 12, highlighted: true },
-    { name: "activity03", shortDes: "卜凡", fullDes: "卜凡，4月13日出生于中国山东省，中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx1.sinaimg.cn/mw690/0077x9VPly1fvgf4k9u7hj32dc47pb2b.jpg", organizer: "ABC", eventDate: new Date('1996/04/13'), time: "12", venue: "LW", quote: 1, highlighted: true },
-    { name: "activity04", shortDes: "oner", fullDes: "坤音四子ONER，中国内地男子偶像组合，由岳岳、木子洋、卜凡、灵超组成", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fwn9he7lwwj31400qon99.jpg", organizer: "ACB", eventDate: new Date('2018/08/31'), time: "12", venue: "LIP", quote: 3, highlighted: false },
+    // { name: "activity01", shortDes: "岳岳", fullDes: "岳岳，7月11日出生于北京市,中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fvgf3xldckj32il3yub2c.jpg", organizer: "ACB", eventDate: new Date('1992/07/11'), time: "12", venue: "WLB", quote: 2, highlighted: true },
+    // { name: "activity011", shortDes: "木子洋", fullDes: "木子洋，1994年4月21日出生，中国内地男歌手、模特，男子组合ONER成员。", imgURL:"https://wx3.sinaimg.cn/mw690/0077x9VPly1fvgf48qxwxj32753wpkjr.jpg", organizer: "ACB", eventDate: new Date('1994/04/21'), time: "12", venue: "POD", quote: 4, highlighted: true },
+    // { name: "activity02", shortDes: "灵超", fullDes: "灵超，2001年1月9日出生于中国河北省，中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fvgf4oau8lj31nr2y7hdt.jpg", organizer: "ACB", eventDate: new Date('2001/01/01'), time: "12", venue: "SWT501", quote: 12, highlighted: true },
+    // { name: "activity03", shortDes: "卜凡", fullDes: "卜凡，4月13日出生于中国山东省，中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx1.sinaimg.cn/mw690/0077x9VPly1fvgf4k9u7hj32dc47pb2b.jpg", organizer: "ABC", eventDate: new Date('1996/04/13'), time: "12", venue: "LW", quote: 1, highlighted: true },
+    // { name: "activity04", shortDes: "oner", fullDes: "坤音四子ONER，中国内地男子偶像组合，由岳岳、木子洋、卜凡、灵超组成", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fwn9he7lwwj31400qon99.jpg", organizer: "ACB", eventDate: new Date('2018/08/31'), time: "12", venue: "LIP", quote: 3, highlighted: false },
+    { name: "activity01", shortDes: "岳岳", fullDes: "岳岳，7月11日出生于北京市,中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fvgf3xldckj32il3yub2c.jpg", organizer: "ACB", eventDate: ("1992/07/11"), time: "12", venue: "WLB", quote: 2, highlighted: true },
+    { name: "activity011", shortDes: "木子洋", fullDes: "木子洋，1994年4月21日出生，中国内地男歌手、模特，男子组合ONER成员。", imgURL:"https://wx3.sinaimg.cn/mw690/0077x9VPly1fvgf48qxwxj32753wpkjr.jpg", organizer: "ACB", eventDate: ("1994/04/21"), time: "12", venue: "POD", quote: 4, highlighted: true },
+    { name: "activity02", shortDes: "灵超", fullDes: "灵超，2001年1月9日出生于中国河北省，中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fvgf4oau8lj31nr2y7hdt.jpg", organizer: "ACB", eventDate: ("2001/01/01"), time: "12", venue: "SWT501", quote: 12, highlighted: true },
+    { name: "activity03", shortDes: "卜凡", fullDes: "卜凡，4月13日出生于中国山东省，中国内地男歌手，男子偶像组合ONER成员。", imgURL:"https://wx1.sinaimg.cn/mw690/0077x9VPly1fvgf4k9u7hj32dc47pb2b.jpg", organizer: "ABC", eventDate:("1996/04/13"), time: "12", venue: "LW", quote: 1, highlighted: true },
+    { name: "activity04", shortDes: "oner", fullDes: "坤音四子ONER，中国内地男子偶像组合，由岳岳、木子洋、卜凡、灵超组成", imgURL:"https://wx4.sinaimg.cn/mw690/0077x9VPly1fwn9he7lwwj31400qon99.jpg", organizer: "ACB", eventDate: ("2018/08/31"), time: "12", venue: "LIP", quote: 3, highlighted: false },
     
   ]);
 

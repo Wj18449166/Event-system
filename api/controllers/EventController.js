@@ -35,7 +35,7 @@ module.exports = {
         //var hName = "Hightlighted" || req.query.name;
         //console.log(hName);
         var models = await Event.find({
-            limit: 4,
+            //limit: 4,
             where: { highlighted: true },
             sort: 'name'
         })
@@ -193,12 +193,6 @@ module.exports = {
 
         return res.view('event/search', { events: models, count: numOfPage });
     },
-
-
-
-
-
-
 
 
 };

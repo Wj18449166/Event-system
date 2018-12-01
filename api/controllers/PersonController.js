@@ -16,18 +16,25 @@ module.exports = {
         var person = await Person.findOne({ personname: req.session.username });
         //console.log("person: " + person);
         if (event.quote == 0 || event.quote < 0) {
-            return res.ok("No Quote");
+            if (req.wantsJSON) {
+                return res.json({ results: "No Quote" });
+            }
+            else {
+                return res.ok("No Quote");
+            }
         }
-        //console.log("111111111111");
-        // 查找当前项目中是否有当前人员已经注册,无法出现弹窗？？？？？
-        // var register = await Event.findOne(req.params.id).populate('isregisted');
-        // var number = register.isregisted.length;
-        // console.log("number =" + number);
-        // for (var i = 0; i < number; i++) {
-        //     if (register.isregisted[i].personname == req.session.username) {
-        //         return res.redirect('/person/myevent');
-        //     }
-        // }
+         //查询该项目注册的学生，regisstermodel是学生的队列
+         var registermodel = await Event.findOne(req.params.id).populate('isregisted');
+         var length = registermodel.isregisted.length;
+
+        for (var i = 0; i < length; i++) {
+            //当前项目注册的学生中有当前的用户，证明该用户已经注册过这个项目
+            if (registermodel.isregisted[i].personname == req.session.username) {
+                if (req.wantsJSON) {
+                    return res.json({ results: "You have registered!" });
+                }
+            }
+        }
 
         await Event.update(req.params.id).set({
             quote: event.quote - 1
@@ -36,7 +43,12 @@ module.exports = {
         await Person.addToCollection(person.id, 'registerFor').members(event.id);
 
         //var model = await Person.findOne(person.id).populate('registerFor');
+        if (req.wantsJSON) {
+            return res.json({ results: "OK" });
+        }
+        else {
         return res.redirect('/person/myevent');
+        }
 
     },
     deleteEvent: async function (req, res) {
@@ -60,10 +72,10 @@ module.exports = {
         var model = await Person.findOne({ personname: req.session.username }).populate('registerFor');
 
         //显示event
-        if (req.wantsJSON)  {
+        if (req.wantsJSON) {
             return res.json(model.registerFor);
         } else {
-        return res.view('person/myevent', { event: model.registerFor });
+            return res.view('person/myevent', { event: model.registerFor });
         }
     },
 
